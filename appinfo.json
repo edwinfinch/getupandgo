@@ -1,0 +1,134 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "Edwin Finch",
+    "longName": "Get Up and Go",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/bt_connected_invert.png",
+                "name": "IMAGE_CONNECTED_INVERTED",
+                "type": "png"
+            },
+            {
+                "file": "images/bt_disconnected_invert.png",
+                "name": "IMAGE_DISCONNECTED_INVERTED",
+                "type": "png"
+            },
+            {
+                "file": "images/bt_disconnected.png",
+                "name": "IMAGE_DISCONNECTED",
+                "type": "png"
+            },
+            {
+                "file": "images/bt_connected.png",
+                "name": "IMAGE_CONNECTED",
+                "type": "png"
+            },
+            {
+                "file": "images/menu_icon.png",
+                "menuIcon": true,
+                "name": "MENU_ICON",
+                "type": "png"
+            },
+            {
+                "file": "images/action_icon_minus.png",
+                "name": "IMAGE_MINUS",
+                "type": "png"
+            },
+            {
+                "file": "images/action_icon_plus.png",
+                "name": "IMAGE_PLUS",
+                "type": "png"
+            },
+            {
+                "file": "images/arrow_next.png",
+                "name": "IMAGE_NEXT",
+                "type": "png"
+            },
+            {
+                "file": "fonts/DS-DIGII.TTF",
+                "name": "FONT_DIGITAL_28",
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-9, :]",
+                "file": "fonts/DS-DIGII.TTF",
+                "name": "FONT_DIGITAL_40",
+                "type": "font"
+            },
+            {
+                "file": "images/bt.png",
+                "name": "IMAGE_BLUETOOTH",
+                "type": "png"
+            },
+            {
+                "characterRegex": "[a-z, ']",
+                "file": "fonts/gotham_light_31.ttf",
+                "name": "FONT_GOTHAM_LIGHT_31",
+                "type": "font"
+            },
+            {
+                "characterRegex": "[a-z]",
+                "file": "fonts/gotham_bold_36.ttf",
+                "name": "FONT_GOTHAM_BOLD_36",
+                "type": "font"
+            },
+            {
+                "file": "images/aboot_fix.png",
+                "name": "IMAGE_ABOOT",
+                "type": "png"
+            },
+            {
+                "file": "images/battery_fix.png",
+                "name": "IMAGE_BATTERY",
+                "type": "png"
+            },
+            {
+                "file": "images/watchface.png",
+                "name": "IMAGE_WATCHFACE",
+                "type": "png"
+            },
+            {
+                "file": "images/timer.png",
+                "name": "IMAGE_TIMER",
+                "type": "png"
+            },
+            {
+                "file": "images/theme.png",
+                "name": "IMAGE_THEME",
+                "type": "png"
+            },
+            {
+                "file": "images/settings.png",
+                "name": "IMAGE_SETTINGS",
+                "type": "png"
+            },
+            {
+                "file": "images/play.png",
+                "name": "IMAGE_PLAY",
+                "type": "png"
+            },
+            {
+                "file": "images/pause.png",
+                "name": "IMAGE_PAUSE",
+                "type": "png"
+            },
+            {
+                "file": "images/onclose.png",
+                "name": "IMAGE_ONCLOSE",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "Get Up & Go",
+    "uuid": "4dd8d555-b35a-4ed4-92d1-f49e6f8e9d0c",
+    "versionCode": 1,
+    "versionLabel": "1.03",
+    "watchapp": {
+        "watchface": false
+    }
+}

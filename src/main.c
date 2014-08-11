@@ -862,10 +862,10 @@ void init(){
 		settings.defaultMinutes = 30;
 		settings.defaultSeconds = 0;
 		
-		mTimer.hours = 1,
-		mTimer.minutes = 30,
-		mTimer.seconds = 0,
-		mTimer.isRunning = 0,
+		mTimer.hours = 1;
+		mTimer.minutes = 30;
+		mTimer.seconds = 0;
+		mTimer.isRunning = 0;
 	}
 	
 	tick_timer_service_subscribe(SECOND_UNIT, &tick_handler);

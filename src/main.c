@@ -846,14 +846,31 @@ void init(){
 		.unload = window_unload_timer,
 	});
 	
+	if(persist_exists(SETTINGS_KEY)){
+		value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
+		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from settings.", value);
+		value = persist_read_data(TIMER_KEY, &mTimer, sizeof(mTimer));
+		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from timer data.", value);
+	}
+	else{
+		settings.watchface = 1;
+		settings.bluetooth = 1;
+		settings.battery = 1;
+		settings.theme = 0;
+		settings.onclose = 0;
+		settings.defaultHours = 1;
+		settings.defaultMinutes = 30;
+		settings.defaultSeconds = 0;
+		
+		mTimer.hours = 1,
+		mTimer.minutes = 30,
+		mTimer.seconds = 0,
+		mTimer.isRunning = 0,
+	}
+	
 	tick_timer_service_subscribe(SECOND_UNIT, &tick_handler);
 	bluetooth_connection_service_subscribe(&bt_handler);
 	battery_state_service_subscribe(&handle_battery);
-	
-	value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
-	APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from settings.", value);
-	value = persist_read_data(TIMER_KEY, &mTimer, sizeof(mTimer));
-	APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from timer data.", value);
 	
 	lightFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_LIGHT_31));
 	boldFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_GOTHAM_BOLD_36));

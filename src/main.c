@@ -651,10 +651,10 @@ void window_load_settings(Window *oi){
 		first_set_menu_items[0].subtitle = "Inverted";
 	}
 	if(settings.onclose){
-		first_set_menu_items[3].subtitle = "Save running timer";
+		first_set_menu_items[3].subtitle = "Save timer";
 	}
 	else{
-		first_set_menu_items[3].subtitle = "Discard running timer";
+		first_set_menu_items[3].subtitle = "Discard timer";
 	}
 	
   Layer *window_layer = window_get_root_layer(oi);
@@ -814,6 +814,30 @@ void window_unload_timer(Window *window){
 }
 
 void init(){
+	if(settings.firstboot == 0){
+		settings.watchface = 1;
+		settings.bluetooth = 1;
+		settings.battery = 1;
+		settings.theme = 0;
+		settings.onclose = 0;
+		settings.defaultHours = 1;
+		settings.defaultMinutes = 30;
+		settings.defaultSeconds = 0;
+		
+		mTimer.hours = 1;
+		mTimer.minutes = 30;
+		mTimer.seconds = 0;
+		mTimer.isRunning = 0;
+		
+		settings.firstboot = 1;
+	}
+	else{
+		value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
+		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from settings.", value);
+		value = persist_read_data(TIMER_KEY, &mTimer, sizeof(mTimer));
+		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from timer data.", value);
+	}
+	
 	menu_window = window_create();
 	aboot_window = window_create();
 	settings_window = window_create();
@@ -845,28 +869,6 @@ void init(){
 		.load = window_load_timer,
 		.unload = window_unload_timer,
 	});
-	
-	if(persist_exists(SETTINGS_KEY)){
-		value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
-		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from settings.", value);
-		value = persist_read_data(TIMER_KEY, &mTimer, sizeof(mTimer));
-		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from timer data.", value);
-	}
-	else{
-		settings.watchface = 1;
-		settings.bluetooth = 1;
-		settings.battery = 1;
-		settings.theme = 0;
-		settings.onclose = 0;
-		settings.defaultHours = 1;
-		settings.defaultMinutes = 30;
-		settings.defaultSeconds = 0;
-		
-		mTimer.hours = 1;
-		mTimer.minutes = 30;
-		mTimer.seconds = 0;
-		mTimer.isRunning = 0;
-	}
 	
 	tick_timer_service_subscribe(SECOND_UNIT, &tick_handler);
 	bluetooth_connection_service_subscribe(&bt_handler);

@@ -47,6 +47,7 @@ typedef struct persist {
 	int defaultHours;
 	int defaultMinutes;
 	int defaultSeconds;
+	bool firstboot;
 }persist;
 
 persist settings = {

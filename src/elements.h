@@ -20,6 +20,8 @@ GBitmap *aboot, *battery, *bluetooth, *menu_icon_digital, *menu_icon_simplicity,
 GBitmap *onclose, *pause, *play, *settings_b, *theme, *timer_b, *watchface, *next_b, *up_b, *down_b;
 GBitmap *connected_b, *disconnected_b, *disconnected_invert, *connected_invert;
 
+bool shouldVibrate = false;
+
 BitmapLayer *bluetooth_layer;
 
 GFont *digital_f, *digital_f_small;

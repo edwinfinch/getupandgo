@@ -152,6 +152,7 @@ void down(ClickRecognizerRef oi_m8, void *context){
 	mTimer.minutes = settings.defaultMinutes;
 	mTimer.seconds = settings.defaultSeconds;
 	mTimer.isRunning = 1;
+	shouldVibrate = false;
 }
 
 static TextLayer* text_layer_init(GRect location, GColor background, GTextAlignment alignment, int font)
@@ -379,7 +380,7 @@ void tick_handler(struct tm *tick_time, TimeUnits unit_changed){
 		mTimer.seconds--;
 			if(mTimer.seconds == 0 && mTimer.minutes == 0 && mTimer.hours == 0) 
 			{
-				vibes_call = 0;
+				shouldVibrate = true;
 				mTimer.hours = settings.defaultHours;
 				mTimer.minutes = settings.defaultMinutes;
 				mTimer.seconds = settings.defaultSeconds;
@@ -426,9 +427,8 @@ void tick_handler(struct tm *tick_time, TimeUnits unit_changed){
 		}
 		text_layer_set_text(timer_layer, timer_buffer);
 	}
-	if(vibes_call != 2){
-		vibes_long_pulse();
-		vibes_call++;
+	if(shouldVibrate){
+		vibes_short_pulse();
 	}
 }
 
@@ -814,7 +814,13 @@ void window_unload_timer(Window *window){
 }
 
 void init(){
-	if(settings.firstboot == 0){
+	if(settings.firstboot == 1){
+		value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
+		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from settings.", value);
+		value = persist_read_data(TIMER_KEY, &mTimer, sizeof(mTimer));
+		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from timer data.", value);
+	}
+	else{
 		settings.watchface = 1;
 		settings.bluetooth = 1;
 		settings.battery = 1;
@@ -830,12 +836,6 @@ void init(){
 		mTimer.isRunning = 0;
 		
 		settings.firstboot = 1;
-	}
-	else{
-		value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
-		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from settings.", value);
-		value = persist_read_data(TIMER_KEY, &mTimer, sizeof(mTimer));
-		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from timer data.", value);
 	}
 	
 	menu_window = window_create();

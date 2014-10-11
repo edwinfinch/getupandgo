@@ -127,7 +127,7 @@
     "shortName": "Get Up & Go",
     "uuid": "4dd8d555-b35a-4ed4-92d1-f49e6f8e9d0c",
     "versionCode": 1,
-    "versionLabel": "1.1",
+    "versionLabel": "1.2",
     "watchapp": {
         "watchface": false
     }

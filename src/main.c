@@ -527,7 +527,7 @@ void window_load_aboot(Window *w){
 	
 	text_layer_set_text(aboot_edwin, "Created by Edwin Finch");
 	text_layer_set_text(aboot_doug, "Idea by Doug German");
-	text_layer_set_text(aboot_version, "v. 1.0.3-b1");
+	text_layer_set_text(aboot_version, "v. 1.2-b2");
 	
 	layer_add_child(window_layer, text_layer_get_layer(aboot_edwin));
 	layer_add_child(window_layer, text_layer_get_layer(aboot_doug));
@@ -814,18 +814,18 @@ void window_unload_timer(Window *window){
 }
 
 void init(){
-	if(settings.firstboot == 1){
+	if(persist_exists(SETTINGS_KEY)){
 		value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
 		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from settings.", value);
 		value = persist_read_data(TIMER_KEY, &mTimer, sizeof(mTimer));
 		APP_LOG(APP_LOG_LEVEL_INFO, "Fetched %d bytes of data from timer data.", value);
 	}
 	else{
-		settings.watchface = 1;
+		settings.watchface = 0;
 		settings.bluetooth = 1;
 		settings.battery = 1;
-		settings.theme = 0;
-		settings.onclose = 0;
+		settings.theme = 1;
+		settings.onclose = 1;
 		settings.defaultHours = 1;
 		settings.defaultMinutes = 30;
 		settings.defaultSeconds = 0;
@@ -834,8 +834,6 @@ void init(){
 		mTimer.minutes = 30;
 		mTimer.seconds = 0;
 		mTimer.isRunning = 0;
-		
-		settings.firstboot = 1;
 	}
 	
 	menu_window = window_create();
